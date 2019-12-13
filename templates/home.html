@@ -10,19 +10,21 @@
 	<header>
 		<div class="container">
 		<div id="brandname">
-			Machine Learning App with Flask
+			<!--Machine Learning App with Flask-->
 		</div>
-		<h2>Spam Detector For SMS Messages</h2>
+		<!--<h2>Spam Detector For SMS Messages</h2>-->
+		<br><br>
+        <center><img src="https://github.com/mathemakitten/bad-wolfram-alpha/raw/master/bad-wolfram-logo2.png"></center>
 
 	</div>
 	</header>
 
-	<div class="ml-container">
+	<div class="ml-container" align="center">
 
 		<form action="{{ url_for('predict')}}" method="POST">
-		<p>Enter what you want to calculate or know about</p>
+			<p><center>Enter what you want to calculate or know about</center></p>
 		<!-- <input type="text" name="comment"/> -->
-		<textarea name="message" rows="4" cols="50"></textarea>
+		<textarea name="message" rows="1" cols="100"></textarea>
 		<br/>
 
 		<input type="submit" class="btn-info" value="predict">
