@@ -1,6 +1,8 @@
-# Bad Wolfram Alpha
+# Wolfram Beta
 
-![Bad Wolfram Alpha](bad-wolfram-logo.png)
+![Wolfram Beta](wolfram-beta-logo.png)
+
+*Wolfram Beta: like Wolfram Alpha, but worse.* 
 
 A neural network attempts to do math.
 
