@@ -49,8 +49,10 @@ def predict():
         vect = cv.transform(data).toarray()
         my_prediction = clf.predict(vect)
         '''
-        my_prediction = 'hello 5+5=1'
-    return render_template('result.html', prediction=my_prediction)
+
+        my_prediction = 0
+
+    return render_template('result.html', prediction=my_prediction, input=message)
 
 
 if __name__ == '__main__':

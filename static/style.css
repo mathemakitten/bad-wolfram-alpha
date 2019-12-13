@@ -8,6 +8,14 @@ body{
 	width:100%;
 	margin: auto;
 	overflow: hidden;
+	font:12px/1.5 Arial, Helvetica,sans-serif;
+}
+
+.ml-container{
+	width:100%;
+	margin: auto;
+	overflow: hidden;
+	font:12px/1.5 Arial, Helvetica,sans-serif;
 }
 
 header{

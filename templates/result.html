@@ -8,23 +8,45 @@
 
 	<header>
 		<div class="container">
-		<div id="brandname">
-			ML App
-		</div>
-		<h2>Spam Detector For SMS Messages</h2>
+		<!--<div id="brandname">-->
+			<!--ML App-->
+		<!--</div>-->
+			<br><br>
+			<center><img src="https://github.com/mathemakitten/bad-wolfram-alpha/raw/master/bad-wolfram-logo2.png"></center>
+
 
 	</div>
 	</header>
-	<p style="color:blue;font-size:20;text-align: center;"><b>Results for Comment</b></p>
+
+	<!--<p style="color:blue;font-size:20;text-align: center;"><b>Results for Comment</b></p>-->
 	<div class="results">
+	<center>
+
+	<h2><font face="Comic Sans Ms" color="grey" size=4>Your input:</font></h2>
+	{{input}}
+
+	<h2><font face="Comic Sans Ms" color="grey" size=4>Result:</font></h2>
+	{{prediction}}
+
+		<br><br><br><br><font face="Arial" color="grey" size=2>Try <a href="home.html">another</a>.</font>
+
+	<br><br><br><br><br><br><br><br>
+	<p><center><font face="Arial" color="grey" size=2>
+		Bad Wolfram Alpha is a neural network has been trained to do grade-school mathematics. <br>
+		It was created by Helen Ngo, Joseph Palermo, Michael Jia, and Rayhane Mama. <br><br>
+		For more information, see our <a href="https://github.com/mathemakitten/bad-wolfram-alpha">GitHub repository</a>.
+
+		<br><br>
 
 
+	</font></center></p>
 
-	{% if prediction == 1%}
-	<h2 style="color:red;">Spam</h2>
-	{% elif prediction == 0%}
-	<h2 style="color:blue;">Not a Spam (It is a Ham)</h2>
-	{% endif %}
+	</center>
+	<!--{% if prediction == 1%}-->
+	<!--<h2 style="color:red;">Spam</h2>-->
+	<!--{% elif prediction == 0%}-->
+	<!--<h2 style="color:blue;">Not a Spam (It is a Ham)</h2>-->
+	<!--{% endif %}-->
 
 	</div>
 

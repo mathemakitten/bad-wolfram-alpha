@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
+	<title>Bad Wolfram Alpha</title>
 	<!-- <link rel="stylesheet" type="text/css" href="../static/css/styles.css"> -->
+	<link rel="favicon" type="image/png" href="favicon.png"/>
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
@@ -21,15 +22,29 @@
 
 	<div class="ml-container" align="center">
 
-		<form action="{{ url_for('predict')}}" method="POST">
-			<p><center>Enter what you want to calculate or know about</center></p>
+		<br>
+		<form action="{{ url_for('predict')}}" method="POST"> <!--onsubmit="return false">-->
+			<p><center><font face="Arial" color="grey" size=2>Enter what you want to calculate or know about</font></center></p>
 		<!-- <input type="text" name="comment"/> -->
 		<textarea name="message" rows="1" cols="100"></textarea>
 		<br/>
 
-		<input type="submit" class="btn-info" value="predict">
+		<input type="submit" class="btn-info" value="submit">
 
 	</form>
+
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+	<p><center><font face="Arial" color="grey" size=2>
+		Bad Wolfram Alpha is a neural network has been trained to do grade-school mathematics. <br>
+		It was created by Helen Ngo, Joseph Palermo, Michael Jia, and Rayhane Mama. <br><br>
+		For more information, see our <a href="https://github.com/mathemakitten/bad-wolfram-alpha">GitHub repository</a>.
+
+		<br><br>
+
+
+	</font></center></p>
 
 	</div>
 
