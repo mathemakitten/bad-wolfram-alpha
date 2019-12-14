@@ -1,6 +1,6 @@
 # Wolfram Beta
 
-![Wolfram Beta](wolfram-beta-logo.png)
+![Wolfram Beta](logo/wolfram-beta-logo.png)
 
 *Wolfram Beta: like Wolfram Alpha, but worse.* 
 
