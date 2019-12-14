@@ -1,16 +1,16 @@
 """ LSTM Encoder-Decoder architecture with the Keras imperative API.  """
-# https://github.com/yusugomori/deeplearning-tf2/blob/master/models/encoder_decoder_lstm.py
 
 import tensorflow as tf
 import numpy as np
 import os
 import argparse
-from constants import ANSWER_MAX_LENGTH
-from preprocessing import idx2char  # TODO cache questions/answers_encoded as .npy files
+#from constants import ANSWER_MAX_LENGTH
+#from preprocessing import idx2char  # TODO cache questions/answers_encoded as .npy files
 from config import *
-from utils import get_logger
+#from utils import get_logger
 import time
 
+'''
 tb_logdir = os.path.join(EXPERIMENT_DIR, 'tensorboard')
 logger = get_logger('validation_log')
 parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -20,24 +20,22 @@ args = parser.parse_args()
 
 tf.config.experimental_run_functions_eagerly(args.eager)
 os.environ['CUDA_VISIBLE_DEVICES'] = "1"
-
-# TODO ADD SLACKBOT, get Ray's code
-# TODO: Take functions out of main
+'''
 
 # load pre-padded data
 # questions_encoded = np.array(np.load('cache/questions_encoded_padded.npy'))
 # answers_encoded = np.array(np.load('cache/answers_encoded_padded.npy'))
 #questions_encoded = np.array(np.load('cache/questions_encoded_padded_interpolate_arithmetic__add_or_sub.npy'))
 #answers_encoded = np.array(np.load('cache/answers_encoded_padded_interpolate_arithmetic__add_or_sub.npy'))
-questions_encoded = np.array(np.load('cache/questions_encoded_padded_interpolate_arithmetic__add_or_sub_ALL_DIFFICULTY.npy'))
-answers_encoded = np.array(np.load('cache/answers_encoded_padded_interpolate_arithmetic__add_or_sub_ALL_DIFFICULTY.npy'))
+#questions_encoded = np.array(np.load('cache/questions_encoded_padded_interpolate_arithmetic__add_or_sub_ALL_DIFFICULTY.npy'))
+#answers_encoded = np.array(np.load('cache/answers_encoded_padded_interpolate_arithmetic__add_or_sub_ALL_DIFFICULTY.npy'))
 
-dataset = tf.data.Dataset.from_tensor_slices((questions_encoded, answers_encoded))
-input_data = dataset.take(NUM_EXAMPLES).shuffle(questions_encoded.shape[0]).batch(BATCH_SIZE) \
-            .prefetch(buffer_size=tf.data.experimental.AUTOTUNE)
-NUM_TRAINING_BATCHES = int(NUM_EXAMPLES/BATCH_SIZE*(1-p_test))
-train_data = input_data.take(NUM_TRAINING_BATCHES).repeat(NUM_EPOCHS)
-valid_data = input_data.skip(NUM_TRAINING_BATCHES)
+#dataset = tf.data.Dataset.from_tensor_slices((questions_encoded, answers_encoded))
+#input_data = dataset.take(NUM_EXAMPLES).shuffle(questions_encoded.shape[0]).batch(BATCH_SIZE) \
+#            .prefetch(buffer_size=tf.data.experimental.AUTOTUNE)
+#NUM_TRAINING_BATCHES = int(NUM_EXAMPLES/BATCH_SIZE*(1-p_test))
+#train_data = input_data.take(NUM_TRAINING_BATCHES).repeat(NUM_EPOCHS)
+#valid_data = input_data.skip(NUM_TRAINING_BATCHES)
 
 # #  load data
 # questions_encoded = np.array(np.load('cache/questions_encoded.npy', allow_pickle=True))
@@ -110,7 +108,7 @@ class EncoderDecoder(tf.keras.Model):
             outputs = tf.concat([outputs, decoder_output], axis=1)
 
         return outputs, output_tokens
-
+'''
 def get_accuracy(output_tokens, targets):
     correct = 0
     # targets = token_to_text(targets)
@@ -238,6 +236,7 @@ def train(training_data, model):
             print(valid_loss_list)
             if all([valid_loss < best_loss for valid_loss in valid_loss_list[-5:]]):
                 return
+'''
 
 def output_to_tensor(tokens):
     tensor_tokens = tf.squeeze(tf.convert_to_tensor(tokens), axis=2)

@@ -1,5 +1,5 @@
 import os
-from constants import VOCAB_SIZE
+#from constants import VOCAB_SIZE
 from datetime import datetime as dt
 current_time = dt.now().strftime('%Y%m%d_%H_%M-')
 
