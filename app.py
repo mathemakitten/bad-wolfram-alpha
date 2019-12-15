@@ -16,9 +16,10 @@ def predict():
         import tensorflow as tf
         from lstm import EncoderDecoder, Encoder, Decoder, inference
         import pickle
+        import numpy as np 
 
-        idx2char = pickle.load(open('idx2char.pkl', 'rb'))
         char2idx = pickle.load(open('char2idx.pkl', 'rb'))
+        idx2char = pickle.load(open('idx2char.pkl', 'rb'))
 
         VOCAB_SIZE = len(char2idx) + 2
 
@@ -42,14 +43,17 @@ def predict():
         # model.save_weights('experiment_results/test')
         model.load_weights('model_weights')
 
-        outputs, output_tokens = model(question)
+        print(questions_encoded)
+        outputs, output_tokens = model(np.expand_dims(np.array(questions_encoded), axis=1))
 
         return outputs, output_tokens
 
     if request.method == 'POST':
         message = request.form['message']
-        data = [message]
+        #data = [message]
+        data = message
         my_prediction = inference(data)
+        print("MY PREDICTION IS: {}".format(my_prediction))
         #my_prediction = 0 #inference(data)
 
     return render_template('result.html', prediction=my_prediction, input=message)

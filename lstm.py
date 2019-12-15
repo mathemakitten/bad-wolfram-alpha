@@ -262,21 +262,25 @@ def inference(inference_data, model):
         targets = data[1]
 
         outputs, output_tokens = inference_step(inputs[:, :], model)
-        loss_mask = tf.dtypes.cast(tf.clip_by_value(targets[:, 1:], 0, 1), tf.float32)
-        validation_loss = tf.keras.losses.sparse_categorical_crossentropy(targets[:, 1:], outputs, from_logits=True)
-        validation_loss = validation_loss * loss_mask
-        accuracy = get_accuracy(output_tokens, targets)
-        inputs = token_to_text(inputs[:, :])
-        targets = token_to_text(targets)
+        print("OUTPUTS: {}".format(outputs))
         predictions = token_to_text(output_to_tensor(output_tokens))
-        for sample_index in range(len(inputs)):
-            print(f'Input: {inputs[sample_index]}')
-            print(f'Target: {targets[sample_index]}')
-            print(f'Prediction: {predictions[sample_index]} \n')
-        accuracy_list.append(accuracy)
-        validation_loss_list.append(tf.reduce_sum(validation_loss)/tf.reduce_sum(loss_mask).numpy())
-    print(f'Validation Accuracy: {np.mean(accuracy_list)}')
-    print(f'Validation Loss: {np.mean(validation_loss_list)}')
+    return predictions 
+
+        #loss_mask = tf.dtypes.cast(tf.clip_by_value(targets[:, 1:], 0, 1), tf.float32)
+        #validation_loss = tf.keras.losses.sparse_categorical_crossentropy(targets[:, 1:], outputs, from_logits=True)
+        #validation_loss = validation_loss * loss_mask
+        #accuracy = get_accuracy(output_tokens, targets)
+        #inputs = token_to_text(inputs[:, :])
+        #targets = token_to_text(targets)
+        #predictions = token_to_text(output_to_tensor(output_tokens))
+        #for sample_index in range(len(inputs)):
+        #    print(f'Input: {inputs[sample_index]}')
+        #    print(f'Target: {targets[sample_index]}')
+        #    print(f'Prediction: {predictions[sample_index]} \n')
+        #accuracy_list.append(accuracy)
+        #validation_loss_list.append(tf.reduce_sum(validation_loss)/tf.reduce_sum(loss_mask).numpy())
+    #print(f'Validation Accuracy: {np.mean(accuracy_list)}')
+    #print(f'Validation Loss: {np.mean(validation_loss_list)}')
 
 if __name__ == '__main__':  # TODO HN move these function definitions out of main... hahahahaha yikes
     np.random.seed(1234)
