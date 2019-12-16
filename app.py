@@ -41,19 +41,11 @@ def predict():
         LSTM_HIDDEN_SIZE = 512
 
         questions_encoded = [char2idx[q] for q in question]
-        answers_encoded = [char2idx[q] for q in question]
 
         questions_encoded = np.expand_dims(np.array(questions_encoded), axis=0)
 
-        # TODO preprocess into single arrays
-        #dataset = tf.data.Dataset.from_tensor_slices((questions_encoded, answers_encoded))
-        #input_data = dataset.take(1).batch(1)
-
-        #data = input_data[0]
-
         model = EncoderDecoder(input_dim=VOCAB_SIZE, embedding_dim=EMBEDDING_SIZE, hidden_dim=LSTM_HIDDEN_SIZE,
                                output_dim=VOCAB_SIZE, max_len=ANSWER_MAX_LENGTH)
-        # model.save_weights('experiment_results/test')
         model.load_weights('20191215_21_03-helen_all_add_subtract/model_weights')
 
         print(questions_encoded)
@@ -67,7 +59,13 @@ def predict():
 
     if request.method == 'POST':
         message = request.form['message']
-        #data = [message]
+
+        message = message.strip()
+
+        for letter in message:  # remove disallowed characters
+            if letter not in char2idx.keys():
+                message = message.replace(letter, '')
+
         data = message
         my_prediction = inference(data)
         print("MY PREDICTION IS: {}".format(my_prediction))
@@ -78,4 +76,7 @@ def predict():
 
 
 if __name__ == '__main__':
-    app.run_server(host='0.0.0.0', port=5000, debug=False)
+    # server side: app.run_server(host='0.0.0.0', port=5000, debug=False)
+    # local: app.run(host='0.0.0.0', port=5000, debug=False)
+    local: app.run(host='0.0.0.0', port=5000, debug=False)
+
