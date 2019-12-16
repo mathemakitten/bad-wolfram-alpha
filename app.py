@@ -71,6 +71,7 @@ def predict():
         data = message
         my_prediction = inference(data)
         print("MY PREDICTION IS: {}".format(my_prediction))
+        # TODO strip bad characters before model inference
         #my_prediction = 0 #inference(data)
 
     return render_template('result.html', prediction=my_prediction, input=message)

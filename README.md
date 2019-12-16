@@ -8,7 +8,7 @@ A neural network attempts to do math.
 
 It does not go well, but it's wildly entertaining.
 
-www.badwolframalpha.com
+www.wolframbeta.art
 
 Running on Tensorflow 2.0, deployed with Flask.
 
