@@ -1,6 +1,8 @@
 * Set up nginx 
 * Change nginx conf
 
+`sudo service nginx start`
+
 `sudo service nginx configtest`
 
 `sudo service nginx restart`
