@@ -54,14 +54,14 @@ def predict():
         model = EncoderDecoder(input_dim=VOCAB_SIZE, embedding_dim=EMBEDDING_SIZE, hidden_dim=LSTM_HIDDEN_SIZE,
                                output_dim=VOCAB_SIZE, max_len=ANSWER_MAX_LENGTH)
         # model.save_weights('experiment_results/test')
-        model.load_weights('model_weights')
+        model.load_weights('20191215_21_03-helen_all_add_subtract/model_weights')
 
         print(questions_encoded)
         outputs, output_tokens = model(questions_encoded)
 
         predicted_text = token_to_text(output_to_tensor(output_tokens))[0]
-        #first_stop_token = predicted_text.index('~')
-        #predicted_text = predicted_text[0:first_stop_token]
+        first_stop_token = predicted_text.index('~')
+        predicted_text = predicted_text[0:first_stop_token]
 
         return predicted_text
 
