@@ -60,8 +60,8 @@ def predict():
         outputs, output_tokens = model(questions_encoded)
 
         predicted_text = token_to_text(output_to_tensor(output_tokens))[0]
-        first_stop_token = predicted_text.index('~')
-        predicted_text = predicted_text[0:first_stop_token]
+        #first_stop_token = predicted_text.index('~')
+        #predicted_text = predicted_text[0:first_stop_token]
 
         return predicted_text
 
