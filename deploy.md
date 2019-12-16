@@ -7,4 +7,4 @@
 
 `sudo service nginx restart`
 
-`gunicorn --workers 1 --worker-class gevent --bind 0.0.0.0:5000 app:app --timeout 30000`
+`gunicorn --workers 2 --worker-class gevent --bind 0.0.0.0:5000 app:app --timeout 30000`
