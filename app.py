@@ -1,5 +1,22 @@
 from flask import Flask, render_template, url_for, request, send_from_directory
 import os
+import tensorflow as tf
+from lstm import EncoderDecoder, Encoder, Decoder, inference
+import pickle
+import numpy as np
+
+char2idx = pickle.load(open('char2idx.pkl', 'rb'))
+idx2char = pickle.load(open('idx2char.pkl', 'rb'))
+
+VOCAB_SIZE = len(char2idx)
+
+ANSWER_MAX_LENGTH = 30
+EMBEDDING_SIZE = 512
+LSTM_HIDDEN_SIZE = 512
+
+model = EncoderDecoder(input_dim=VOCAB_SIZE, embedding_dim=EMBEDDING_SIZE, hidden_dim=LSTM_HIDDEN_SIZE,
+                       output_dim=VOCAB_SIZE, max_len=ANSWER_MAX_LENGTH)
+model.load_weights('20191215_21_03-helen_all_add_subtract/model_weights')
 
 app = Flask(__name__)
 
@@ -17,14 +34,6 @@ def home():
 @app.route('/predict', methods=['POST'])
 def predict():
 
-    import tensorflow as tf
-    from lstm import EncoderDecoder, Encoder, Decoder, inference
-    import pickle
-    import numpy as np
-
-    char2idx = pickle.load(open('char2idx.pkl', 'rb'))
-    idx2char = pickle.load(open('idx2char.pkl', 'rb'))
-
     def output_to_tensor(tokens):
         tensor_tokens = tf.squeeze(tf.convert_to_tensor(tokens), axis=2)
         return tf.transpose(tensor_tokens)
@@ -39,19 +48,9 @@ def predict():
 
     def inference(question):
 
-        VOCAB_SIZE = len(char2idx)
-
-        ANSWER_MAX_LENGTH = 30
-        EMBEDDING_SIZE = 512
-        LSTM_HIDDEN_SIZE = 512
-
         questions_encoded = [char2idx[q] for q in question]
 
         questions_encoded = np.expand_dims(np.array(questions_encoded), axis=0)
-
-        model = EncoderDecoder(input_dim=VOCAB_SIZE, embedding_dim=EMBEDDING_SIZE, hidden_dim=LSTM_HIDDEN_SIZE,
-                               output_dim=VOCAB_SIZE, max_len=ANSWER_MAX_LENGTH)
-        model.load_weights('20191215_21_03-helen_all_add_subtract/model_weights')
 
         print(questions_encoded)
         outputs, output_tokens = model(questions_encoded)
@@ -74,8 +73,6 @@ def predict():
         data = message
         my_prediction = inference(data)
         print("MY PREDICTION IS: {}".format(my_prediction))
-        # TODO strip bad characters before model inference
-        #my_prediction = 0 #inference(data)
 
     return render_template('result.html', prediction=my_prediction, input=message)
 
@@ -86,5 +83,5 @@ if __name__ == '__main__':
     app.run_server(host='0.0.0.0', port=5000, debug=False)
 
     # local:
-    # app.run(host='0.0.0.0', port=5000, debug=False)
+    #app.run(host='0.0.0.0', port=5000, debug=False)
 
