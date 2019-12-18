@@ -62,7 +62,7 @@ def predict():
         return predicted_text
 
     if request.method == 'POST':
-        message = request.form['message']
+        message = request.form.get(message, '')
 
         message = message.strip()
 
