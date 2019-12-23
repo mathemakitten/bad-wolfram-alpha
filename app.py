@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, send_from_directory
+from flask import Flask, render_template, url_for, request, redirect, send_from_directory
 import os
 import tensorflow as tf
 from lstm import EncoderDecoder, Encoder, Decoder, inference
@@ -30,6 +30,9 @@ def favicon():
 def home():
     return render_template('index.html')
 
+@app.route('/predict', methods=['GET'])
+def predict_redirect():
+    return redirect(url_for('home'))
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -61,18 +64,17 @@ def predict():
 
         return predicted_text
 
-    if request.method == 'POST':
-        message = request.form['message']
+    message = request.form['message']
 
-        message = message.strip()
+    message = message.strip()
 
-        for letter in message:  # remove disallowed characters
-            if letter not in char2idx.keys():
-                message = message.replace(letter, '')
+    for letter in message:  # remove disallowed characters
+        if letter not in char2idx.keys():
+            message = message.replace(letter, '')
 
-        data = message
-        my_prediction = inference(data)
-        print("MY PREDICTION IS: {}".format(my_prediction))
+    data = message
+    my_prediction = inference(data)
+    print("MY PREDICTION IS: {}".format(my_prediction))
 
     return render_template('result.html', prediction=my_prediction, input=message)
 
@@ -83,5 +85,5 @@ if __name__ == '__main__':
     app.run_server(host='0.0.0.0', port=5000, debug=False)
 
     # local:
-    #app.run(host='0.0.0.0', port=5000, debug=False)
+    # app.run(host='0.0.0.0', port=5000, debug=False)
 
